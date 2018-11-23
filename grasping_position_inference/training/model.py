@@ -71,10 +71,15 @@ class Model(object):
             error_message = 'The model has to be trained before it can be stored.'
             raise ModelIsNotTrained(error_message)
 
-        model_name = '{},{},{},{},{},{};{},{};{},.model'.format(self.grasping_object_type,
-                                                   self.grasping_type,
-                                                   self.robot_face,
-                                                   self.bottom_face,
-                                                   self.arm, self._min_x, self._max_x, self._min_y, self._max_y)
+        model_name = '{},{},{},{},{},{};{},{};{},.model'.format(
+                                                    self.grasping_object_type,
+                                                    self.grasping_type,
+                                                    self.robot_face,
+                                                    self.bottom_face,
+                                                    self.arm,
+                                                    self._min_x,
+                                                    self._max_x,
+                                                    self._min_y,
+                                                    self._max_y)
         model_save_path = join(MODEL_PATH, model_name)
         joblib.dump(self._trained_model, model_save_path)
