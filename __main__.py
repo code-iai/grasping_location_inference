@@ -1,37 +1,9 @@
-import sys
-from os import listdir
-from os.path import isdir, join
-import pandas as pd
-from sklearn.naive_bayes import GaussianNB
+from os.path import join
 from sklearn.externals import joblib
 
+from grasping_position_inference.training.model_generator import generate_models
+
 MODEL_PATH = 'models'
-DATA_PATH = 'data'
-
-
-def train_model(data):
-    features = data[['t_x', 't_y', 't_z']]
-    labels = data["success"].map(lambda x: 1 if x else 0)
-
-    gnb = GaussianNB()
-
-    return gnb.fit(features, labels)
-
-
-def generate_models():
-    for data_filename in listdir(DATA_PATH):
-        data_filepath = join(DATA_PATH, data_filename)
-        grasping_object, grasping_type, faces, arm, _ = data_filename.split('.')
-        robot_face, bottom_face = faces.split()
-
-        data = pd.read_csv(data_filepath, sep=',')
-
-        if not data.empty:
-            model = train_model(data)
-
-            model_name = '{}.{}.{}.{}.{}.model'.format(grasping_object, grasping_type, robot_face, bottom_face, arm)
-            model_save_path = join(MODEL_PATH, model_name)
-            joblib.dump(model, model_save_path)
 
 
 def get_probability_distribution_for_grid(x, y, model_name):
