@@ -10,13 +10,36 @@ MODEL_PATH = join(ABSOLUTE_PATH, 'models')
 DATA_PATH = join(ABSOLUTE_PATH, 'data')
 
 
+def _remove_negative_zero(number):
+    if number == 0.0:
+        return 0.0
+    else:
+        return number
+
+
 class Model(object):
     def __init__(self, data_filename):
         self.data_filename = data_filename
         self.grasping_object_type, self.grasping_type, self.robot_face, self.bottom_face, self.arm \
             = self._parse_data_filename()
         self._data = self._read_data()
+        self._min_x, self._min_y, self._max_x, self._max_y = self._determine_feature_space()
+
         self._trained_model = None
+
+    def _determine_feature_space(self):
+        min_x, min_y = self._data[['t_x', 't_y']].min()
+        max_x, max_y = self._data[['t_x', 't_y']].max()
+
+        min_x, min_y, max_x, max_y = round(min_x, 1), round(min_y, 1), round(max_x, 1), round(max_y, 1)
+
+        if min_x == 0.0:
+            min_x = 0.0
+
+        return _remove_negative_zero(min_x), \
+               _remove_negative_zero(min_y), \
+               _remove_negative_zero(max_x), \
+               _remove_negative_zero(max_y)
 
     def _parse_data_filename(self):
         grasping_object_type, grasping_type, faces, arm = self.data_filename.split(',')
@@ -48,10 +71,10 @@ class Model(object):
             error_message = 'The model has to be trained before it can be stored.'
             raise ModelIsNotTrained(error_message)
 
-        model_name = '{},{},{},{},{}.model'.format(self.grasping_object_type,
+        model_name = '{},{},{},{},{},{};{},{};{},.model'.format(self.grasping_object_type,
                                                    self.grasping_type,
                                                    self.robot_face,
                                                    self.bottom_face,
-                                                   self.arm)
+                                                   self.arm, self._min_x, self._max_x, self._min_y, self._max_y)
         model_save_path = join(MODEL_PATH, model_name)
         joblib.dump(self._trained_model, model_save_path)
