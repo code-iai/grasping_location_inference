@@ -74,9 +74,9 @@ class Model(object):
         model_name = '{},{},{},{},{},{};{},{};{},.model'.format(
                                                     self.grasping_object_type,
                                                     self.grasping_type,
-                                                    self.robot_face,
                                                     self.bottom_face,
                                                     self.arm,
+                                                    self.robot_face,
                                                     self._min_x,
                                                     self._max_x,
                                                     self._min_y,
