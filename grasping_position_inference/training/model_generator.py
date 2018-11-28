@@ -4,7 +4,7 @@ from grasping_position_inference.training.exceptions import DataSetIsEmpty
 from grasping_position_inference.training.model import Model
 from grasping_position_inference.root import ABSOLUTE_PATH
 
-DATA_PATH = path.join(ABSOLUTE_PATH,'data')
+DATA_PATH = path.join(ABSOLUTE_PATH, 'data')
 
 
 def generate_models():
