@@ -1,5 +1,3 @@
-import pytest
-
 from grasping_position_inference.inference.predicator import Predicator
 
 DUMMY_FILENAME = 'cup.n.01,BACK,BOTTOM,pr2_left_arm,RIGHT-SIDE,-0.5;0.5,-0.8;-0.5,.model'
