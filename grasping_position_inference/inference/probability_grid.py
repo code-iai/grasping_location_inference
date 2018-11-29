@@ -14,7 +14,8 @@ class ProbabilityGrid(object):
         self._grid = _init_grid()
 
     def __getitem__(self, key):
-        return self._grid[key[0]][key[1]]
+        x, y = _transform_key_to_grid_coordinates(key)
+        return self._grid[x][y]
 
 
 def _init_grid():
@@ -39,3 +40,9 @@ def _steps(start, end):
         distance = biggest + smallest
 
     return int(round(distance / STEP_SIZE, 0))
+
+def _transform_key_to_grid_coordinates(key):
+    x = _steps(MIN_X, key[0])
+    y = _steps(key[1], MAX_Y)
+
+    return x, y
