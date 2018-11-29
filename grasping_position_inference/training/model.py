@@ -59,7 +59,7 @@ class Model(object):
             error_message = 'The empty data set "{}" cannot be used for training.'.format(self.data_filename)
             raise DataSetIsEmpty(error_message)
 
-        features = self._data[['t_x', 't_y', 't_z']]
+        features = self._data[['t_x', 't_y']]
         labels = self._data["success"].map(lambda x: 1 if x else 0)
 
         gnb = GaussianNB()
