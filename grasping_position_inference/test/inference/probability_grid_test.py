@@ -8,6 +8,13 @@ def test_should_return_correct_probability_based_on_grid_cell():
     assert probability_grid[-0.8, 0.] == 0.5
 
 
+def test_should_update_value_on_grid_cell():
+    probability_grid = ProbabilityGrid()
+
+    probability_grid[-0.8, 0.] = 0.0
+    assert probability_grid[-0.8, 0.] == 0.0
+
+
 def test_should_return_correct_steps_numbers():
     assert _steps(-0.8, -0.8) == 0
     assert _steps(-0.8, 0.8) == 160

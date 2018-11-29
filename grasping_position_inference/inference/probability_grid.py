@@ -17,6 +17,10 @@ class ProbabilityGrid(object):
         x, y = _transform_key_to_grid_coordinates(key)
         return self._grid[x][y]
 
+    def __setitem__(self, key, value):
+        x, y = _transform_key_to_grid_coordinates(key)
+        self._grid[x][y] = value
+
 
 def _init_grid():
     dimension = _steps(-0.8, 0.8)
