@@ -9,6 +9,7 @@ MODEL_PATH = join(ABSOLUTE_PATH, 'models')
 X_STEP_SIZE = 0.01
 Y_STEP_SIZE = 0.01
 
+
 class Predicator(object):
     def __init__(self, file_name):
         self._file_name = file_name

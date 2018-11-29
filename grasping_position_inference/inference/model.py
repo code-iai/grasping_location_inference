@@ -2,9 +2,12 @@
 
 import re
 from os import listdir, path
+import numpy as np
 
 from grasping_position_inference.inference.predicator import Predicator
 from grasping_position_inference.root import ABSOLUTE_PATH
+from grasping_position_inference.inference.grid import Grid
+
 
 MODEL_PATH = path.join(ABSOLUTE_PATH, 'models')
 
@@ -29,6 +32,15 @@ class Model(object):
             self.predictors.append(predicator)
 
     def get_probability_distribution_for_grid(self):
+        result_grid = _init_result_grid()
+
         for predictor in self.predictors:
-            result = predictor.get_probability_distribution_for_grid()
-            print result
+            inference_result = predictor.get_probability_distribution_for_grid()
+
+
+def _init_result_grid():
+    dimension = 1.6/0.01
+    dimension = int(round(dimension, 0))
+
+    return np.full((dimension, dimension), 0.5)
+
