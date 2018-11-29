@@ -6,6 +6,8 @@ MIN_Y = -0.8
 MAX_X = 0.8
 MAX_Y = 0.8
 
+INIT_PROBABILITY = 0.5
+
 
 class ProbabilityGrid(object):
     def __init__(self):
@@ -16,10 +18,10 @@ class ProbabilityGrid(object):
 
 
 def _init_grid():
-    dimension = 1.6 / STEP_SIZE
-    dimension = int(round(dimension, 0)) + 1
+    dimension = _steps(-0.8, 0.8)
+    dimension = dimension + 1
 
-    return np.full((dimension, dimension), 0.5)
+    return np.full((dimension, dimension), INIT_PROBABILITY)
 
 
 def _steps(start, end):
