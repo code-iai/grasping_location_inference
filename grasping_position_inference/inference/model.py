@@ -32,16 +32,9 @@ class Model(object):
             self.predictors.append(predicator)
 
     def get_probability_distribution_for_grid(self):
-        result_grid = _init_result_grid()
-        result_grid[0][0] = 1.
-
         for predictor in self.predictors:
             inference_result = predictor.get_probability_distribution_for_grid()
 
 
-def _init_result_grid():
-    dimension = 1.6/0.01
-    dimension = int(round(dimension, 0)) + 1
 
-    return np.full((dimension, dimension), 0.5)
 
