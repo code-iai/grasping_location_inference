@@ -2,11 +2,10 @@
 
 import re
 from os import listdir, path
-import numpy as np
 
 from grasping_position_inference.inference.predicator import Predicator
 from grasping_position_inference.root import ABSOLUTE_PATH
-from grasping_position_inference.inference.grid import Grid
+from grasping_position_inference.inference.probability_grid import ProbabilityGrid
 
 
 MODEL_PATH = path.join(ABSOLUTE_PATH, 'models')
@@ -32,8 +31,13 @@ class Model(object):
             self.predictors.append(predicator)
 
     def get_probability_distribution_for_grid(self):
+        probability_grid = ProbabilityGrid()
+
         for predictor in self.predictors:
-            inference_result = predictor.get_probability_distribution_for_grid()
+            probability_grid.update(predictor)
+
+        return probability_grid
+
 
 
 

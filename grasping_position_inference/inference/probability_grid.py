@@ -21,6 +21,20 @@ class ProbabilityGrid(object):
         x, y = _transform_key_to_grid_coordinates(key)
         self._grid[x][y] = value
 
+    def update(self, predictor):
+        inference_result = predictor.get_probability_distribution_for_grid()
+
+        min_x, min_y, max_x, max_y = predictor._min_x, predictor._min_y, predictor._max_x, predictor._max_y
+        x_steps = _steps(min_x, max_x)
+        y_steps = _steps(min_y, max_y)
+
+        for x in range(0, x_steps):
+            current_x = min_x + (x*STEP_SIZE)
+            for y in range(0, y_steps):
+                current_y = min_y + (y*STEP_SIZE)
+                self[current_x, current_y] = inference_result[x][y]
+
+
 
 def _init_grid():
     dimension = _steps(-0.8, 0.8)
