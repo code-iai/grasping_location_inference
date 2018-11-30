@@ -26,4 +26,5 @@ if __name__ == "__main__":
     #generate_models()
     model = Model('cup.n.01', 'BACK', 'BOTTOM', 'pr2_left_arm')
     model.load()
-    model.get_probability_distribution_for_grid()
+    result = model.get_probability_distribution_for_grid()
+    print 'done'

@@ -18,5 +18,5 @@ class Grid(object):
         x = np.divide(x, 100.)
         y = np.divide(y, 100.)
 
-        return np.meshgrid(y, x)
+        return np.meshgrid(x, y)
 

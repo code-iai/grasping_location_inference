@@ -15,11 +15,11 @@ class ProbabilityGrid(object):
 
     def __getitem__(self, key):
         x, y = _transform_key_to_grid_coordinates(key)
-        return self._grid[x][y]
+        return self._grid[y][x]
 
     def __setitem__(self, key, value):
         x, y = _transform_key_to_grid_coordinates(key)
-        self._grid[x][y] = value
+        self._grid[y][x] = value
 
     def update(self, predictor):
         inference_result = predictor.get_probability_distribution_for_grid()
@@ -32,8 +32,7 @@ class ProbabilityGrid(object):
             current_x = min_x + (x*STEP_SIZE)
             for y in range(0, y_steps):
                 current_y = min_y + (y*STEP_SIZE)
-                self[current_x, current_y] = inference_result[x][y]
-
+                self[current_x, current_y] = inference_result[y][x]
 
 
 def _init_grid():
@@ -58,6 +57,7 @@ def _steps(start, end):
         distance = biggest + smallest
 
     return int(round(distance / STEP_SIZE, 0))
+
 
 def _transform_key_to_grid_coordinates(key):
     x = _steps(MIN_X, key[0])
