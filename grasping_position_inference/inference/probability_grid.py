@@ -28,9 +28,9 @@ class ProbabilityGrid(object):
         x_steps = _steps(min_x, max_x)
         y_steps = _steps(min_y, max_y)
 
-        for x in range(0, x_steps):
+        for x in range(0, x_steps+1):
             current_x = min_x + (x*STEP_SIZE)
-            for y in range(0, y_steps):
+            for y in range(0, y_steps+1):
                 current_y = min_y + (y*STEP_SIZE)
                 self[current_x, current_y] = inference_result[y][x]
 
