@@ -6,7 +6,7 @@ MIN_Y = -0.8
 MAX_X = 0.8
 MAX_Y = 0.8
 
-INIT_PROBABILITY = 0.5
+INIT_PROBABILITY = 0.0
 
 
 class ProbabilityGrid(object):
