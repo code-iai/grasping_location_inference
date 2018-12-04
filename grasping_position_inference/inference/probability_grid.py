@@ -34,6 +34,10 @@ class ProbabilityGrid(object):
                 current_y = min_y + (y*STEP_SIZE)
                 self[current_x, current_y] = inference_result[y][x]
 
+    def get_grid(self):
+        norm = np.sum(self._grid)
+        return np.divide(self._grid, norm)
+
 
 def _init_grid():
     dimension = _steps(-0.8, 0.8)

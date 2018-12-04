@@ -36,7 +36,7 @@ class Model(object):
         for predictor in self.predictors:
             probability_grid.update(predictor)
 
-        return probability_grid
+        return probability_grid.get_grid()
 
 
 
