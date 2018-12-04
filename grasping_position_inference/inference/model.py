@@ -12,21 +12,21 @@ MODEL_PATH = path.join(ABSOLUTE_PATH, 'models')
 
 
 class Model(object):
-    def __init__(self, *evidences):
-        self.grasping_object_type, self.grasping_type, self.bottom_face, self.arm = evidences
-        self._regex = self._prepare_regex_for_model_filtering()
+    def __init__(self):
         self.predictors = []
 
-    def _prepare_regex_for_model_filtering(self):
-        return re.escape("{},{},{},{}".format(
-            self.grasping_object_type, self.grasping_type, self.bottom_face, self.arm)) + r".+$"
+    def add_predictor(self, *evidences):
+        grasping_object_type, grasping_type, robot_face, bottom_face, arm = evidences
+        predicator_name = "{},{},{},{},{},".format(grasping_object_type, grasping_type,bottom_face, arm, robot_face)
+        models = listdir(MODEL_PATH)
+        file_name = ''
 
-    def load(self):
-        models = '\n'.join(listdir(MODEL_PATH))
-        matches = re.finditer(self._regex, models, re.MULTILINE)
+        for model in models:
+            if model.startswith(predicator_name):
+                file_name = model
+                break
 
-        for match in matches:
-            file_name = match.group()
+        if file_name:
             predicator = Predicator(file_name)
             self.predictors.append(predicator)
 

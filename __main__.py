@@ -24,7 +24,11 @@ def get_probability_distribution_for_grid(x, y, model_name):
 
 if __name__ == "__main__":
     #generate_models()
-    model = Model('cup.n.01', 'BACK', 'BOTTOM', 'pr2_left_arm')
-    model.load()
+    model = Model()
+    model.add_predictor('cup.n.01', 'FRONT','FRONT', 'BOTTOM', 'pr2_left_arm')
+    model.add_predictor('cup.n.01', 'LEFT-SIDE', 'LEFT-SIDE', 'BOTTOM', 'pr2_left_arm')
+    model.add_predictor('cup.n.01', 'RIGHT-SIDE', 'RIGHT-SIDE', 'BOTTOM', 'pr2_left_arm')
+    model.add_predictor('cup.n.01', 'BACK', 'BACK', 'BOTTOM', 'pr2_left_arm')
     result = model.get_probability_distribution_for_grid()
+
     print 'done'
