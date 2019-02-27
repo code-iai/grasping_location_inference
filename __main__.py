@@ -24,6 +24,7 @@ def get_probability_distribution_for_grid(x, y, model_name):
 
 if __name__ == "__main__":
     generate_models()
+
     model = Model()
     model.add_predictor('cup.n.01', 'FRONT','FRONT', 'BOTTOM', 'pr2_left_arm')
     model.add_predictor('cup.n.01', 'LEFT-SIDE', 'LEFT-SIDE', 'BOTTOM', 'pr2_left_arm')
@@ -33,9 +34,16 @@ if __name__ == "__main__":
 
     model = Model()
     model.add_predictor('bowl.n.01', 'TOP', 'FRONT', 'BOTTOM', 'pr2_left_arm')
-    model.add_predictor('cup.n.01', 'TOP', 'LEFT-SIDE', 'BOTTOM', 'pr2_left_arm')
-    model.add_predictor('cup.n.01', 'TOP', 'RIGHT-SIDE', 'BOTTOM', 'pr2_left_arm')
-    model.add_predictor('cup.n.01', 'TOP', 'BACK', 'BOTTOM', 'pr2_left_arm')
+    model.add_predictor('bowl.n.01', 'TOP', 'LEFT-SIDE', 'BOTTOM', 'pr2_left_arm')
+    model.add_predictor('bowl.n.01', 'TOP', 'RIGHT-SIDE', 'BOTTOM', 'pr2_left_arm')
+    model.add_predictor('bowl.n.01', 'TOP', 'BACK', 'BOTTOM', 'pr2_left_arm')
+    result = model.get_probability_distribution_for_grid()
+
+    model = Model()
+    model.add_predictor('spoon.n.01', 'TOP', 'FRONT', 'BOTTOM', 'pr2_left_arm')
+    model.add_predictor('spoon.n.01', 'TOP', 'LEFT-SIDE', 'BOTTOM', 'pr2_left_arm')
+    model.add_predictor('spoon.n.01', 'TOP', 'RIGHT-SIDE', 'BOTTOM', 'pr2_left_arm')
+    model.add_predictor('spoon.n.01', 'TOP', 'BACK', 'BOTTOM', 'pr2_left_arm')
     result = model.get_probability_distribution_for_grid()
 
     print 'done'
