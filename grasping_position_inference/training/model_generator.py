@@ -7,8 +7,8 @@ from grasping_position_inference.root import ABSOLUTE_PATH
 DATA_PATH = path.join(ABSOLUTE_PATH, 'data')
 
 
-def generate_models():
-    for data_filename in listdir(DATA_PATH):
+def generate_models(data_path=DATA_PATH):
+    for data_filename in listdir(data_path):
         model = Model(data_filename)
         try:
             model.train()
