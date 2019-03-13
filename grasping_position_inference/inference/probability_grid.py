@@ -1,10 +1,10 @@
 import numpy as np
-
+MIN_X = -1.3
+MIN_Y = -1.3
+MAX_X = 1.3
+MAX_Y = 1.3
 STEP_SIZE = 0.01
-MIN_X = -0.8
-MIN_Y = -0.8
-MAX_X = 0.8
-MAX_Y = 0.8
+
 
 INIT_PROBABILITY = 0.0
 
@@ -27,7 +27,7 @@ class ProbabilityGrid(object):
         min_x, min_y, max_x, max_y = predictor._min_x, predictor._min_y, predictor._max_x, predictor._max_y
         x_steps = _steps(min_x, max_x)
         y_steps = _steps(min_y, max_y)
-
+        print ''
         for x in range(0, x_steps+1):
             current_x = min_x + (x*STEP_SIZE)
             for y in range(0, y_steps+1):
@@ -40,7 +40,7 @@ class ProbabilityGrid(object):
 
 
 def _init_grid():
-    dimension = _steps(-0.8, 0.8)
+    dimension = _steps(-1.3, 1.3)
     dimension = dimension + 1
 
     return np.full((dimension, dimension), INIT_PROBABILITY)
