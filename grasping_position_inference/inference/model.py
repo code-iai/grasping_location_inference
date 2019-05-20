@@ -1,24 +1,20 @@
 # coding=utf8
 
-import re
-from os import listdir, path
+from os import listdir
 
 from grasping_position_inference.inference.predicator import Predicator
-from grasping_position_inference.root import ABSOLUTE_PATH
 from grasping_position_inference.inference.probability_grid import ProbabilityGrid
 
 
-MODEL_PATH = path.join(ABSOLUTE_PATH, 'models')
-
-
 class Model(object):
-    def __init__(self):
+    def __init__(self, model_path):
         self.predictors = []
+        self._model_path = model_path
 
     def add_predictor(self, *evidences):
         grasping_object_type, grasping_type, robot_face, bottom_face, arm = evidences
         predicator_name = "{},{},{},{},{},".format(grasping_object_type, grasping_type,bottom_face, arm, robot_face)
-        models = listdir(MODEL_PATH)
+        models = listdir(self._model_path)
         file_name = ''
 
         for model in models:

@@ -17,8 +17,9 @@ def _remove_negative_zero(number):
 
 
 class Model(object):
-    def __init__(self, data_filename, data_path):
+    def __init__(self, data_filename, data_path, model_path):
         self._data_path = data_path
+        self._model_path = model_path
         self.data_filename = data_filename
         self.grasping_object_type, self.grasping_type, self.robot_face, self.bottom_face, self.arm \
             = self._parse_data_filename()
@@ -66,7 +67,7 @@ class Model(object):
 
         self._trained_model = gnb.fit(features, labels)
 
-    def store(self, model_path=MODEL_PATH):
+    def store(self):
         if self._trained_model is None:
             error_message = 'The model has to be trained before it can be stored.'
             raise ModelIsNotTrained(error_message)
@@ -81,5 +82,5 @@ class Model(object):
                                                     self._max_x,
                                                     self._min_y,
                                                     self._max_y)
-        model_save_path = join(model_path, model_name)
+        model_save_path = join(self._model_path, model_name)
         joblib.dump(self._trained_model, model_save_path)
