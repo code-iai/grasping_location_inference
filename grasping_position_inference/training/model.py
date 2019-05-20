@@ -7,7 +7,6 @@ from grasping_position_inference.root import ABSOLUTE_PATH
 from grasping_position_inference.training.exceptions import DataSetIsEmpty, ModelIsNotTrained
 
 MODEL_PATH = join(ABSOLUTE_PATH, 'models')
-DATA_PATH = join(ABSOLUTE_PATH, 'data')
 
 
 def _remove_negative_zero(number):
@@ -18,7 +17,8 @@ def _remove_negative_zero(number):
 
 
 class Model(object):
-    def __init__(self, data_filename):
+    def __init__(self, data_filename, data_path):
+        self._data_path = data_path
         self.data_filename = data_filename
         self.grasping_object_type, self.grasping_type, self.robot_face, self.bottom_face, self.arm \
             = self._parse_data_filename()
@@ -51,7 +51,7 @@ class Model(object):
         return grasping_object_type, grasping_type, robot_face, bottom_face, arm
 
     def _read_data(self):
-        data_filepath = join(DATA_PATH, self.data_filename)
+        data_filepath = join(self._data_path, self.data_filename)
         return pd.read_csv(data_filepath, sep=',')
 
     def train(self):
@@ -66,7 +66,7 @@ class Model(object):
 
         self._trained_model = gnb.fit(features, labels)
 
-    def store(self):
+    def store(self, model_path=MODEL_PATH):
         if self._trained_model is None:
             error_message = 'The model has to be trained before it can be stored.'
             raise ModelIsNotTrained(error_message)
@@ -81,5 +81,5 @@ class Model(object):
                                                     self._max_x,
                                                     self._min_y,
                                                     self._max_y)
-        model_save_path = join(MODEL_PATH, model_name)
+        model_save_path = join(model_path, model_name)
         joblib.dump(self._trained_model, model_save_path)

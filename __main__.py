@@ -1,5 +1,6 @@
 from os.path import join
 from sklearn.externals import joblib
+import sys
 
 from grasping_position_inference.training.model_generator import generate_models
 from grasping_position_inference.inference.model import Model
@@ -23,7 +24,9 @@ def get_probability_distribution_for_grid(x, y, model_name):
 
 
 if __name__ == "__main__":
-    generate_models()
+    args = sys.argv[1:]
+
+    generate_models(args[0])
 
     model = Model()
     model.add_predictor('cup.n.01', 'FRONT','FRONT', 'BOTTOM', 'pr2_left_arm')

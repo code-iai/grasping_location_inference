@@ -10,7 +10,7 @@ DATA_PATH = path.join(ABSOLUTE_PATH, 'data')
 def generate_models(data_path=DATA_PATH):
     for data_filename in listdir(data_path):
         if data_filename.endswith('.csv'):
-            model = Model(data_filename)
+            model = Model(data_filename, data_path)
             try:
                 model.train()
                 model.store()
