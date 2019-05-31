@@ -1,9 +1,9 @@
 from os.path import join
-from grasping_position_inference.root import ABSOLUTE_PATH
-from sklearn.externals import joblib
-import numpy as np
-from grasping_position_inference.inference.grid import Grid
 
+from sklearn.externals import joblib
+
+from grasping_position_inference.inference.grid import Grid
+from grasping_position_inference.root import ABSOLUTE_PATH
 
 MODEL_PATH = join(ABSOLUTE_PATH, 'models')
 X_STEP_SIZE = 0.01
