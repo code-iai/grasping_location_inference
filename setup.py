@@ -36,5 +36,9 @@ setuptools.setup(
         "Programming Language :: Python :: 2",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
+    ],
+    install_requires=[
+        'numpy==1.14.2',
+        'scikit-learn==0.20.0'
     ]
 )
