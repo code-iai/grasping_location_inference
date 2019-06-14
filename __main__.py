@@ -49,5 +49,12 @@ if __name__ == "__main__":
     model.add_predictor('spoon.n.01', 'TOP', 'BACK', 'BOTTOM', 'pr2_left_arm')
     result = model.get_probability_distribution_for_grid()
 
+    model = Model(args[1])
+    model.add_predictor('not_object.n.01', 'TOP', 'FRONT', 'BOTTOM', 'pr2_left_arm')
+    model.add_predictor('not_object.n.01', 'TOP', 'LEFT-SIDE', 'BOTTOM', 'pr2_left_arm')
+    model.add_predictor('not_object.n.01', 'TOP', 'RIGHT-SIDE', 'BOTTOM', 'pr2_left_arm')
+    model.add_predictor('not_object.n.01', 'TOP', 'BACK', 'BOTTOM', 'pr2_left_arm')
+    result = model.get_probability_distribution_for_grid()
+
     print result
     print 'done'
