@@ -23,7 +23,7 @@ class Model(object):
                 break
 
         if file_name:
-            predicator = Predicator(file_name)
+            predicator = Predicator(file_name, self._model_path)
             self.predictors.append(predicator)
 
     def get_probability_distribution_for_grid(self):

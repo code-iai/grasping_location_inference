@@ -11,9 +11,9 @@ Y_STEP_SIZE = 0.01
 
 
 class Predicator(object):
-    def __init__(self, file_name):
+    def __init__(self, file_name, model_path=MODEL_PATH):
         self._file_name = file_name
-        self._model_filepath = join(MODEL_PATH, file_name)
+        self._model_filepath = join(model_path, file_name)
         self._min_x, self._max_x, self._min_y, self._max_y = self._get_min_max_values_for_x_y()
         self._grid = self._create_grid()
 
