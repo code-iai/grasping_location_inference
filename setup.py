@@ -23,7 +23,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="grasping_position_inference",
-    version="1.0.0",
+    version="1.1.0",
     author="Sebastian Koralewski",
     author_email="seba@cs.uni-bremen.de",
     description="Utilizes machine learning to infer the most probable grasping position for a defined object",
