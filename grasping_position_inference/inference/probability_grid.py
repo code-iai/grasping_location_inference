@@ -36,7 +36,10 @@ class ProbabilityGrid(object):
 
     def get_grid(self):
         norm = np.sum(self._grid)
-        return np.divide(self._grid, norm)
+        if norm > 0.0:
+            return np.divide(self._grid, norm)
+        else:
+            return self._grid
 
 
 def _init_grid():
