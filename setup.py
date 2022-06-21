@@ -38,7 +38,7 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     install_requires=[
-        'numpy==1.14.2',
+        'numpy==1.22.0',
         'scikit-learn==0.20.0'
     ]
 )
